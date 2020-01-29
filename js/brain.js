@@ -37,6 +37,9 @@ class Brain {
 					this.maxScore = bird.score
 					this.bestBird = bird
 					this.bestNetwork = this.saveBest()
+					if (bird.passedPipe.length >= 15) {
+						let index = this.birds.indexOf(this.bestBird)
+					}
 				}
 			} else {
 				neEV.networkScore(this.gen[index], bird.score + 10 * bird.passedPipe.length); //  - bird.lastPipeHeight prend en compte la haiteur a laquelle l'oiseau c'est crashé

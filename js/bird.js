@@ -77,3 +77,50 @@ class Bird {
 		}
 	}
 }
+
+class CheatedBird extends Bird {
+	constructor(radius, ground) {
+		super(radius, ground, false)
+		this.neEv = new Neuroevolution({
+			population: 1,
+			network: [2, [2], 1]
+		})
+		this.network = this.neEv.nextGeneration()[0]
+		this.network.setSave(smartBrain)
+	}
+
+	update() {
+		this.detectCollision()
+		let inputs = [
+			this.y / window.innerHeight,
+			this.nextPipe.y / window.innerHeight
+		]
+		let result = this.network.compute(inputs)
+		if (result >= .5) { this.jump() }
+		if (this.y + this.radius / 2 <= window.innerHeight - this.ground.y && this.y - this.radius / 2 >= 0) {
+			this.gravity += this.velocity
+			this.y += this.gravity
+			this.score++
+		} else {
+			this.alive = false
+		}
+	}
+
+	render(ctx) {
+		let birdImg = new Image()
+		birdImg.src = 'ressources/bird-enemy.png'
+
+		if (DEBUG) {
+			ctx.fillStyle = '#eee'
+			ctx.beginPath()
+			ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI)
+			ctx.fill()
+		} else {
+			ctx.save()
+			ctx.translate(this.x, this.y)
+			ctx.rotate(Math.PI / 2 * this.gravity / 20)
+			ctx.drawImage(birdImg, 0, 0, 35, 28)
+			ctx.restore()
+		}
+	}
+}

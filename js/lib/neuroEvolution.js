@@ -231,6 +231,7 @@ var Neuroevolution = function(options) {
 	 */
 	Network.prototype.compute = function(inputs) {
 		// Set the value of each Neuron in the input layer.
+
 		for (var i in inputs) {
 			if (this.layers[0] && this.layers[0].neurons[i]) {
 				this.layers[0].neurons[i].value = inputs[i];

@@ -1,13 +1,13 @@
-const DEBUG = false
+const DEBUG = true
 const canvas = document.querySelector('#canvas')
 const dpi = window.devicePixelRatio
 const ctx = canvas.getContext('2d')
 const bgColor = 'rgb(96, 186, 195)'
 
-const birdRadius = 20
-const smartBrain = `{"layers":[{"id":0,"neurons":[{"value":0.6243708609271523,"weights":[]},{"value":0.7653178963519267,"weights":[]}]},{"id":1,"neurons":[{"value":0.5251544259730203,"weights":[-1.2542183639657278,1.1548143903319879]},{"value":0.5049521635072105,"weights":[0.3806057520938446,-0.2846266111970974]}]},{"id":2,"neurons":[{"value":0.48635347908950954,"weights":[-0.9300720101297109,0.8591542334783404]}]}]}`
-
-const MODE = 'player' // 'auto'|'player'
+const birdRadius = 19
+// const smartBrain = { "layers": [{ "id": 0, "neurons": [{ "value": 0.6243708609271523, "weights": [] }, { "value": 0.7653178963519267, "weights": [] }] }, { "id": 1, "neurons": [{ "value": 0.5251544259730203, "weights": [-1.2542183639657278, 1.1548143903319879] }, { "value": 0.5049521635072105, "weights": [0.3806057520938446, -0.2846266111970974] }] }, { "id": 2, "neurons": [{ "value": 0.48635347908950954, "weights": [-0.9300720101297109, 0.8591542334783404] }] }] }
+const smartBrain = { "neurons": [2, 2, 1], "weights": [0.19516375343064896, -0.39550168472661973, -0.7534904325710081, 0.44023942951581274, 0.5557702209319282, -0.582633625152837] }
+const MODE = 'versus' // 'auto'|'player'|'versus'
 
 
 // Initialisaton
@@ -32,12 +32,17 @@ const neEV = new Neuroevolution({ // Neuro Evolution
 const brain = new Brain()
 const ground = new Ground()
 const player = new Bird(birdRadius, ground, true)
+let enemy;
 
 if (MODE == 'auto') {
 	brain.start()
+} else if (MODE == 'versus') {
+	enemy = new CheatedBird(birdRadius, ground);
+
 }
 
 ground.generatePipes(10);
+
 
 // Events
 ['load', 'resize'].forEach(event => {
@@ -86,8 +91,11 @@ function update() {
 	if (lost) return
 	if (MODE == 'auto') {
 		brain.update()
-	} else if (MODE == 'player') {
+	} else if (MODE == 'player' || MODE == 'versus') {
 		player.update()
+	}
+	if (MODE == 'versus') {
+		enemy.update()
 	}
 	ground.update()
 }
@@ -101,9 +109,12 @@ function render(timestamp) {
 	if (MODE == 'auto') {
 		brain.birds.forEach(bird => bird.render(ctx))
 		displayInformations()
-	} else if (MODE == 'player') {
+	} else if (MODE == 'player' || MODE == 'versus') {
 		player.render(ctx)
 		displayScore()
+	}
+	if (MODE == 'versus') {
+		enemy.render(ctx)
 	}
 
 	if (lost) {
