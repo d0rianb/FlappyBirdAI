@@ -1,4 +1,4 @@
-const DEBUG = true
+const DEBUG = false
 const canvas = document.querySelector('#canvas')
 const dpi = window.devicePixelRatio
 const ctx = canvas.getContext('2d')
@@ -7,7 +7,7 @@ const bgColor = 'rgb(96, 186, 195)'
 const birdRadius = 20
 const smartBrain = `{"layers":[{"id":0,"neurons":[{"value":0.6243708609271523,"weights":[]},{"value":0.7653178963519267,"weights":[]}]},{"id":1,"neurons":[{"value":0.5251544259730203,"weights":[-1.2542183639657278,1.1548143903319879]},{"value":0.5049521635072105,"weights":[0.3806057520938446,-0.2846266111970974]}]},{"id":2,"neurons":[{"value":0.48635347908950954,"weights":[-0.9300720101297109,0.8591542334783404]}]}]}`
 
-const MODE = 'auto' // 'auto'|'player|versus'
+const MODE = 'player' // 'auto'|'player'
 
 
 // Initialisaton
@@ -17,10 +17,8 @@ let lost = false
 
 canvas.style.backgroundColor = bgColor
 
-if (MODE == 'versus') {
-	populationNumber = 1
-} else if (MODE == 'auto') {
-	populationNumber = 50
+if (MODE == 'auto') {
+	populationNumber = 75
 }
 
 const neEV = new Neuroevolution({ // Neuro Evolution
@@ -37,11 +35,6 @@ const player = new Bird(birdRadius, ground, true)
 
 if (MODE == 'auto') {
 	brain.start()
-
-	if (MODE == 'versus') {
-		brain.set(smartBrain)
-		console.log(brain);
-	}
 }
 
 ground.generatePipes(10);
@@ -62,7 +55,7 @@ window.addEventListener('keydown', key => {
 function splashScreen() {
 	ctx.font = '2em Roboto'
 	ctx.fillStyle = '#e5e5e5'
-	ctx.fillText(`Score : ${player .passedPipe.length}`, window.innerWidth / 2 - 25, window.innerHeight / 2 - 50)
+	ctx.fillText(`Score : ${player.passedPipe.length}`, window.innerWidth / 2 - 25, window.innerHeight / 2 - 50)
 }
 
 function frameRate(timestamp) {
@@ -83,11 +76,17 @@ function displayInformations() {
 	ctx.fillText(`Birds Current Score: ${brain.currentBestScore}`, 20, 130)
 }
 
+function displayScore() {
+	ctx.font = '1em Roboto'
+	ctx.fillStyle = '#e5e5e5'
+	ctx.fillText(`Score : ${player.passedPipe.length}`, 20, 50)
+}
+
 function update() {
 	if (lost) return
-	if (MODE == 'auto' || MODE == 'versus') {
+	if (MODE == 'auto') {
 		brain.update()
-	} else if (MODE == 'player' || MODE == 'versus') {
+	} else if (MODE == 'player') {
 		player.update()
 	}
 	ground.update()
@@ -99,14 +98,14 @@ function render(timestamp) {
 	frameRate(timestamp)
 	ground.pipes.forEach(pipe => pipe.render(ctx))
 	ground.render(ctx)
-	if (MODE == 'auto' || MODE == 'versus') {
-		brain.birds.forEach(bird => bird.render(ctx))
-	} else if (MODE == 'player' || MODE == 'versus') {
-		player.render(ctx)
-	}
 	if (MODE == 'auto') {
+		brain.birds.forEach(bird => bird.render(ctx))
 		displayInformations()
+	} else if (MODE == 'player') {
+		player.render(ctx)
+		displayScore()
 	}
+
 	if (lost) {
 		splashScreen()
 		return

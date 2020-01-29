@@ -51,7 +51,7 @@ class Pipe {
 		this.y = y
 		this.width = 80
 		this.focus = false
-		this.gap = Math.random() * 10 + 60
+		this.gap = Math.random() * 30 + 50
 	}
 
 	render(ctx) {
