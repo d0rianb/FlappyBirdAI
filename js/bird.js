@@ -6,7 +6,7 @@ class Bird {
 		this.ground = ground
 		this.gravity = 0
 		this.velocity = 0.3
-		this.up = -6;
+		this.up = -6
 		this.alive = true
 		this.player = player
 		this.score = 0
@@ -30,11 +30,12 @@ class Bird {
 				nextPipeDist = Infinity
 				if (!this.passedPipe.includes(this.nextPipe)) {
 					this.passedPipe.push(this.nextPipe)
+					this.nextPipe.focus = false
 				}
 			}
 			if (dist > 0 && dist < nextPipeDist) { this.nextPipe = pipe }
 		})
-		if (debug) { this.nextPipe.focus = true }
+		if (DEBUG) { this.nextPipe.focus = true }
 		let nextPipeDist = this.dist(this.nextPipe)
 
 		if (nextPipeDist <= this.nextPipe.width && nextPipeDist >= 0) {
@@ -62,7 +63,7 @@ class Bird {
 		let birdImg = new Image()
 		birdImg.src = 'ressources/bird.png'
 
-		if (debug) {
+		if (DEBUG) {
 			ctx.fillStyle = '#eee'
 			ctx.beginPath()
 			ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI)

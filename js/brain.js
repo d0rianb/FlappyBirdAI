@@ -26,7 +26,7 @@ class Brain {
 				let nextPipe = bird.nextPipe
 				let inputs = [
 					bird.y / window.innerHeight,
-					(nextPipe.y) / window.innerHeight,
+					nextPipe.y / window.innerHeight
 				]
 				let result = this.gen[index].compute(inputs)
 				if (result >= .5) { bird.jump() }
@@ -53,6 +53,13 @@ class Brain {
 	saveBest() {
 		let index = this.birds.indexOf(this.bestBird)
 		return this.gen[index]
+	}
+
+	set(save) {
+		this.birds.forEach((bird, i) => {
+			this.gen[i].setSave(save)
+		})
+
 	}
 
 }

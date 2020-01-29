@@ -63,6 +63,7 @@ class Pipe {
 
 		let pipeTopImg = new Image()
 		pipeTopImg.src = 'ressources/pipe-top.png'
+		this.focus ? pipeTopImg.src = 'ressources/pipe-top-focus.png' : null
 		ctx.drawImage(pipeTopImg, this.x - 3, this.y - this.gap - 45, this.width + 6, 45)
 		ctx.drawImage(pipeTopImg, this.x - 3, this.y + this.gap, this.width + 6, 45)
 	}
