@@ -1,5 +1,5 @@
 const maxPipeGap = 250
-const pipeGap = 360
+const pipeGap = 370
 
 class Ground {
 	constructor() {

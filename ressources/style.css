@@ -1,4 +1,56 @@
 body {
-    margin: 0;
-    overflow: hidden;
+  margin: 0;
+  overflow: hidden;
+}
+
+#canvas {
+  z-index: 1;
+}
+
+.mode-select {
+  /* Position */
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  z-index: 2;
+  /* Style */
+  -webkit-appearance: none;
+  padding: .5em;
+  outline: none;
+  border: solid 1px rgba(250, 250, 250, .25);
+  border-radius: 5px;
+  background-color: rgba(200, 200, 200, .5);
+  color: rgba(250, 250, 250, 1);
+  text-align: center;
+}
+
+.mode-select:hover {
+  background-color: rgba(200, 200, 200, .75);
+  color: rgba(255, 255, 255, 1);
+}
+
+.restart-button {
+  position: absolute;
+  width: 6em;
+  height: 3em;
+  top: 60vh;
+  left: calc(50% - 3em);
+  z-index: 2;
+  /* Style */
+  -webkit-appearance: none;
+  padding: .5em;
+  outline: none;
+  border: solid 1px rgba(250, 250, 250, .25);
+  border-radius: 5px;
+  background-color: rgba(200, 200, 200, .6);
+  color: rgba(250, 250, 250, 1);
+  text-align: center;
+  font-size: 1em;
+  box-shadow: 1px 1px 2px #7b7b7b7d;
+}
+
+.restart-button:hover {
+  background-color: rgba(200, 200, 200, .75);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 1px 1px 2px #545353a3;
 }

@@ -19,6 +19,7 @@ class Bird {
 	}
 
 	dist(pipe) {
+		if (!pipe) return Infinity
 		return pipe.x + pipe.width - this.x - this.radius / 2
 	}
 
@@ -111,7 +112,7 @@ class CheatedBird extends Bird {
 		birdImg.src = 'ressources/bird-enemy.png'
 
 		if (DEBUG) {
-			ctx.fillStyle = '#eee'
+			ctx.fillStyle = '#9ee'
 			ctx.beginPath()
 			ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI)
 			ctx.fill()
