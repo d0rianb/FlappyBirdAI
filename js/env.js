@@ -1,4 +1,3 @@
-const maxPipeGap = 250
 const pipeGap = 370
 
 class Ground {
