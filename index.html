@@ -2,19 +2,22 @@
 <html lang="fr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Flappy Bird</title>
-  <link rel="stylesheet" href="ressources/style.css">
+    <meta charset="utf-8">
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" href="ressources/style.css">
 </head>
 
 <body>
-  <select class="mode-select" name="mode-select">
-    <option value="player">1 Player</option>
-    <option value="versus">Versus AI</option>
-    <option value="auto">AI train</option>
-  </select>
-  <button type="button" name="restart" class="restart-button"> Restart</button>
-  <canvas id="canvas" autofocus></canvas>
+    <select class="mode-select" name="mode-select">
+        <option value="player">1 Player</option>
+        <option value="versus">Versus AI</option>
+        <option value="auto">AI train</option>
+    </select>
+    <button type="button" name="restart" class="restart-button"> Restart</button>
+    <div class="pause-label">
+        <span>Pause</span>
+    </div>
+    <canvas id="canvas" autofocus></canvas>
 </body>
 <script src="js/lib/neuroEvolution.js" charset="utf-8"></script>
 <script src="js/env.js" charset="utf-8"></script>

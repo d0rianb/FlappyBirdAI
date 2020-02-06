@@ -6,11 +6,13 @@ const bgColor = 'rgb(96, 186, 195)'
 
 const select = document.querySelector('.mode-select')
 const restartButton = document.querySelector('.restart-button')
+const pauseLabel = document.querySelector('.pause-label')
 
 const birdRadius = 20
 const smartBrain = { "neurons": [2, 2, 1], "weights": [0.19516375343064896, -0.39550168472661973, -0.7534904325710081, 0.44023942951581274, 0.5557702209319282, -0.582633625152837] }
 
 let MODE = 'versus' // 'auto'|'player'|'versus'
+let isPause = false
 
 // Initialisaton
 let populationNumber = 0
@@ -78,13 +80,17 @@ restartButton.addEventListener('click', e => restartGame(MODE))
 window.addEventListener('keydown', key => {
     if (key.keyCode == 32) { // Space Bar
         player.jump()
+    } else if (key.keyCode == 80) { // p
+        isPause = !isPause
+        console.log('toggle pause');
+        pauseLabel.style.display = isPause ? 'flex' : 'none'
     }
 })
 
 function splashScreen() {
     ctx.font = '2em Roboto'
     ctx.fillStyle = '#e5e5e5'
-    ctx.fillText(`Score : ${player.passedPipe.length}`, window.innerWidth / 2 - 25, window.innerHeight / 2 - 50)
+    ctx.fillText(`Score : ${player.passedPipe.length}`, window.innerWidth / 2 - 32, window.innerHeight / 2 - 50)
     restartButton.style.display = 'block'
 }
 
@@ -114,6 +120,7 @@ function displayScore() {
 
 function update() {
     if (lost) return
+    if (isPause) return
     if (MODE == 'auto') {
         brain.update()
     } else if (MODE == 'player' || MODE == 'versus') {
@@ -142,12 +149,18 @@ function render(timestamp) {
         enemy.render(ctx)
     }
 
+    if (isPause) {
+
+    }
+
     if (lost) {
         splashScreen()
         return
     }
     window.requestAnimationFrame(render)
 }
+
+
 
 restartGame(MODE)
 

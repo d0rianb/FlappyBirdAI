@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    font: 1em 'Roboto', 'Helvetica', sans-serif;
 }
 
 #canvas {
@@ -53,4 +54,14 @@ body {
     background-color: rgba(200, 200, 200, .75);
     color: rgba(255, 255, 255, 1);
     box-shadow: 1px 1px 2px #545353a3;
+}
+
+.pause-label {
+    display: none;
+    position: absolute;
+    width: 3em;
+    top: 45%;
+    left: calc(50% - 1.5em);
+    color: rgba(255, 255, 255, .8);
+    font-size: 3em;
 }
