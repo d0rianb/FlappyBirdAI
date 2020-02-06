@@ -1,4 +1,4 @@
-let pipeGap = 400 * 1100 / window.innerWidth
+let pipeGap = window.innerWidth / 3
 
 class Ground {
     constructor() {
