@@ -1,4 +1,4 @@
-const pipeGap = 370
+let pipeGap = 370 * 755 / window.innerHeight
 
 class Ground {
     constructor() {
