@@ -1,9 +1,9 @@
-let pipeGap = 370 * 755 / window.innerHeight
+let pipeGap = 400 * 1100 / window.innerWidth
 
 class Ground {
     constructor() {
         this.x = Infinity
-        this.y = 80
+        this.y = 80 * 755 / window.innerHeight
         this.speed = 5
         this.pipes = []
     }
@@ -50,7 +50,7 @@ class Pipe {
         this.y = y
         this.width = 80
         this.focus = false
-        this.gap = Math.random() * 30 + 50
+        this.gap = (Math.random() * 30 + 50) * 755 / window.innerHeight
     }
 
     render(ctx) {
