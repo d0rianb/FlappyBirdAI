@@ -11,7 +11,7 @@ Plusieurs modes sont disponibles :
  - __Manuel__ : Simple copie du jeu original avec moins de fonctionnalitées et plus de bugs.
 
 
-#### Bugs connues :
+#### Bugs connus :
  - le jeu est parfois impossible.
  - le texte `60 fps` apparait derrière le jeu.
  - Le jeu n'est pas `responsive` et devient injouable sur les écrans trop petits.
